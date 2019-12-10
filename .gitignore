@@ -26,17 +26,17 @@ save.xml
 *.lo
 
 # Executables
-src/fty-template-rest_selftest
-src/fty_template_rest_selftest
+src/fty-certificate-generator-rest_selftest
+src/fty_certificate_generator_rest_selftest
 *.exe
 *.out
 *.app
 core
 
 # Distcheck workspace and archives
-fty-template-rest-*/
-fty-template-rest-*.tar.gz
-fty-template-rest-*.zip
+fty-certificate-generator-rest-*/
+fty-certificate-generator-rest-*.tar.gz
+fty-certificate-generator-rest-*.zip
 
 # Man pages
 doc/*.1

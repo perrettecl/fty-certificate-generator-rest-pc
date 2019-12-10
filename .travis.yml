@@ -68,6 +68,7 @@ pkg_deps_prereqs_source: &pkg_deps_prereqs_source
     - cxxtools-dev
     - libfty-common-logging-dev
     - libfty-common-rest-dev
+    - libfty-common-mlm-dev
 
 # NOTE: Our forks are checked out and built without pkg dependencies in use
 pkg_deps_prereqs: &pkg_deps_prereqs
@@ -213,7 +214,7 @@ deploy:
     # To encrypt your access token run: `travis encrypt -r user/repo`
     secure: <encrypted github access token>
   file_glob: true
-  file: ${FTY_TEMPLATE_REST_DEPLOYMENT}
+  file: ${FTY_CERTIFICATE_GENERATOR_REST_DEPLOYMENT}
   skip_cleanup: true
   on:
     branch: master

@@ -14,10 +14,11 @@ AM_CPPFLAGS = \
     ${cxxtools_CFLAGS} \
     ${fty_common_logging_CFLAGS} \
     ${fty_common_rest_CFLAGS} \
+    ${fty_common_mlm_CFLAGS} \
     -D__STDC_FORMAT_MACROS \
     -I$(srcdir)/include
 
-project_libs = ${libsasl2_LIBS} ${tntdb_LIBS} ${cxxtools_LIBS} ${fty_common_logging_LIBS} ${fty_common_rest_LIBS}
+project_libs = ${libsasl2_LIBS} ${tntdb_LIBS} ${cxxtools_LIBS} ${fty_common_logging_LIBS} ${fty_common_rest_LIBS} ${fty_common_mlm_LIBS}
 
 SUBDIRS = doc
 SUBDIRS += include
@@ -43,6 +44,7 @@ EXTRA_DIST += \
     Findcxxtools.cmake \
     Findfty_common_logging.cmake \
     Findfty_common_rest.cmake \
+    Findfty_common_mlm.cmake \
     builds/cmake/Modules/ClangFormat.cmake \
     builds/cmake/clang-format-check.sh.in \
     builds/cmake/Config.cmake.in \
@@ -50,9 +52,16 @@ EXTRA_DIST += \
 endif
 
 EXTRA_DIST += \
-    src/rest_template_GET.h \
+    src/rest_services_GET.h \
+    src/rest_service_GET.h \
+    src/rest_certificate_POST.h \
+    src/rest_certificate_GET.h \
+    src/rest_certificate_PUT.h \
+    src/rest_csr_POST.h \
+    src/rest_csr_GET.h \
+    src/rest_csr_DELETE.h \
     README.md \
-    src/fty_template_rest_classes.h
+    src/fty_certificate_generator_rest_classes.h
 
 # NOTE: this "include" syntax is not a "make" but an "autotools" keyword,
 # see https://www.gnu.org/software/automake/manual/html_node/Include.html

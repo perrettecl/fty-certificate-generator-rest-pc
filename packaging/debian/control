@@ -1,7 +1,7 @@
 #
 #    NOTE: This file was customized after generation, take care to keep this during updates.
 #
-#    fty-template-rest - Template REST API
+#    fty-certificate-generator-rest - Certificate Generator REST API
 #
 #    Copyright (C) 2014 - 2019 Eaton
 #
@@ -19,10 +19,10 @@
 #    with this program; if not, write to the Free Software Foundation, Inc.,
 #    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-Source:         fty-template-rest
+Source:         fty-certificate-generator-rest
 Section:        net
 Priority:       optional
-Maintainer:     fty-template-rest Developers <eatonipcopensource@eaton.com>
+Maintainer:     fty-certificate-generator-rest Developers <eatonipcopensource@eaton.com>
 Standards-Version: 4.0.1.0
 Build-Depends: debhelper (>= 9),
     pkg-config,
@@ -31,51 +31,29 @@ Build-Depends: debhelper (>= 9),
     libcxxtools-dev,
     libfty-common-logging-dev,
     libfty-common-rest-dev,
+    libfty-common-mlm-dev,
     asciidoc-base | asciidoc, xmlto,
     dh-autoreconf
 
-Package: libfty-template-rest1
-Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: fty-template-rest shared library
- This package contains shared library for fty-template-rest:
- template rest api
-
-Package: libfty-template-rest-dev
-Architecture: any
-Section: libdevel
-Depends:
-    ${misc:Depends},
-    libsasl2-dev,
-    libtntdb-dev,
-    libcxxtools-dev,
-    libfty-common-logging-dev,
-    libfty-common-rest-dev,
-    libfty-template-rest1 (= ${binary:Version})
-Description: fty-template-rest development tools
- This package contains development files for fty-template-rest:
- template rest api
-
-Package: fty-template-rest-dbg
+Package: fty-certificate-generator-rest-dbg
 Architecture: any
 Section: debug
 Priority: optional
 Depends:
-    libfty-template-rest1 (= ${binary:Version}),
     ${misc:Depends}
-Description: fty-template-rest debugging symbols
- This package contains the debugging symbols for fty-template-rest:
- template rest api.
+Description: fty-certificate-generator-rest debugging symbols
+ This package contains the debugging symbols for fty-certificate-generator-rest:
+ certificate generator rest api.
 
 # Customization over zproject-generated code follows
 # for the legacy-named metapackage to group the common
 # installation dependency for other components:
-Package: fty-template-rest
+Package: fty-certificate-generator-rest
 Architecture: any
 Section: net
 Priority: optional
 Depends:
-    libfty-template-rest1 (= ${binary:Version}),
+    libfty-certificate-generator-rest1 (= ${binary:Version}),
     ${misc:Depends},
     tntnet-runtime,
     malamute,
@@ -85,5 +63,5 @@ Depends:
     libfty-common-rest1,
     ipc-data
 Recommends: msmtp
-Description: grouping of end-user solution with fty-template-rest
+Description: grouping of end-user solution with fty-certificate-generator-rest
 
