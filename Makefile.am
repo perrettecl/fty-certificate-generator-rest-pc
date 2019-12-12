@@ -12,13 +12,15 @@ AM_CPPFLAGS = \
     ${libsasl2_CFLAGS} \
     ${tntdb_CFLAGS} \
     ${cxxtools_CFLAGS} \
+    ${fty_common_CFLAGS} \
     ${fty_common_logging_CFLAGS} \
     ${fty_common_rest_CFLAGS} \
     ${fty_common_mlm_CFLAGS} \
+    ${fty_certificate_generator_CFLAGS} \
     -D__STDC_FORMAT_MACROS \
     -I$(srcdir)/include
 
-project_libs = ${libsasl2_LIBS} ${tntdb_LIBS} ${cxxtools_LIBS} ${fty_common_logging_LIBS} ${fty_common_rest_LIBS} ${fty_common_mlm_LIBS}
+project_libs = ${libsasl2_LIBS} ${tntdb_LIBS} ${cxxtools_LIBS} ${fty_common_LIBS} ${fty_common_logging_LIBS} ${fty_common_rest_LIBS} ${fty_common_mlm_LIBS} ${fty_certificate_generator_LIBS}
 
 SUBDIRS = doc
 SUBDIRS += include
@@ -42,9 +44,11 @@ EXTRA_DIST += \
     Findlibsasl2.cmake \
     Findtntdb.cmake \
     Findcxxtools.cmake \
+    Findfty_common.cmake \
     Findfty_common_logging.cmake \
     Findfty_common_rest.cmake \
     Findfty_common_mlm.cmake \
+    Findfty_certificate_generator.cmake \
     builds/cmake/Modules/ClangFormat.cmake \
     builds/cmake/clang-format-check.sh.in \
     builds/cmake/Config.cmake.in \

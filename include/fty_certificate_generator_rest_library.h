@@ -33,9 +33,11 @@
 #include <sasl/sasl.h>
 #include <tntdb.h>
 #include <cxxtools/allocator.h>
+#include <fty_common.h>
 #include <fty_log.h>
 #include <fty_common_rest.h>
 #include <fty_common_mlm.h>
+#include <fty-certificate-generator.h>
 
 //  FTY_CERTIFICATE_GENERATOR_REST version macros for compile-time API detection
 #define FTY_CERTIFICATE_GENERATOR_REST_VERSION_MAJOR 1

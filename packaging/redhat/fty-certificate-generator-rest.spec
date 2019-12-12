@@ -51,9 +51,11 @@ BuildRequires:  gcc-c++
 BuildRequires:  cyrus-sasl-devel
 BuildRequires:  tntdb-devel
 BuildRequires:  cxxtools-devel
+BuildRequires:  fty-common-devel
 BuildRequires:  fty-common-logging-devel
 BuildRequires:  fty-common-rest-devel
 BuildRequires:  fty-common-mlm-devel
+BuildRequires:  fty-certificate-generator-devel
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 
 %description

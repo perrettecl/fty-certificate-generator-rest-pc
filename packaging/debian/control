@@ -1,6 +1,4 @@
 #
-#    NOTE: This file was customized after generation, take care to keep this during updates.
-#
 #    fty-certificate-generator-rest - Certificate Generator REST API
 #
 #    Copyright (C) 2014 - 2019 Eaton
@@ -29,9 +27,11 @@ Build-Depends: debhelper (>= 9),
     libsasl2-dev,
     libtntdb-dev,
     libcxxtools-dev,
+    libfty-common-dev,
     libfty-common-logging-dev,
     libfty-common-rest-dev,
     libfty-common-mlm-dev,
+    libfty-certificate-generator-dev,
     asciidoc-base | asciidoc, xmlto,
     dh-autoreconf
 
