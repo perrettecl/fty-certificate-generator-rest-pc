@@ -18,28 +18,3 @@
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
     =========================================================================
 */
-
-#ifndef REST_CERTIFICATE_POST_H_INCLUDED
-#define REST_CERTIFICATE_POST_H_INCLUDED
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-//  @interface
-//  Create a new rest_certificate_post
-FTY_TEMPLATE_REST_PRIVATE rest_certificate_post_t *
-    rest_certificate_post_new (void);
-
-//  Destroy the rest_certificate_post
-FTY_TEMPLATE_REST_PRIVATE void
-    rest_certificate_post_destroy (rest_certificate_post_t **self_p);
-
-
-//  @end
-
-#ifdef __cplusplus
-}
-#endif
-
-#endif

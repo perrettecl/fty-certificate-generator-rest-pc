@@ -24,6 +24,9 @@
 
 #include "fty_certificate_generator_rest_library.h"
 
+#include <string>
+#include <vector>
+
 namespace restapi
 {
     static constexpr char CLIENT_ID[]    = "fty-certificate-generator-rest";

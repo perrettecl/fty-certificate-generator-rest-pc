@@ -33,6 +33,10 @@
 #include "../include/fty-certificate-generator-rest.h"
 
 //  Opaque class structures to allow forward references
+#ifndef HELPERS_CERTIFICATE_GENERATOR_REST_T_DEFINED
+typedef struct _helpers_certificate_generator_rest_t helpers_certificate_generator_rest_t;
+#define HELPERS_CERTIFICATE_GENERATOR_REST_T_DEFINED
+#endif
 #ifndef REST_SERVICES_GET_T_DEFINED
 typedef struct _rest_services_get_t rest_services_get_t;
 #define REST_SERVICES_GET_T_DEFINED
@@ -107,6 +111,7 @@ safe_malloc (size_t size, const char *file, unsigned line)
 #endif // __CZMQ_PRELUDE_H_INCLUDED__
 
 
+#include "helpers_certificate_generator_rest.h"
 #include "rest_services_GET.h"
 #include "rest_service_GET.h"
 #include "rest_certificate_POST.h"

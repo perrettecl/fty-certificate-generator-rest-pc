@@ -56,6 +56,7 @@ EXTRA_DIST += \
 endif
 
 EXTRA_DIST += \
+    src/helpers_certificate_generator_rest.h \
     src/rest_services_GET.h \
     src/rest_service_GET.h \
     src/rest_certificate_POST.h \

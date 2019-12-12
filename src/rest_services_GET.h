@@ -18,28 +18,3 @@
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
     =========================================================================
 */
-
-#ifndef REST_SERVICES_GET_H_INCLUDED
-#define REST_SERVICES_GET_H_INCLUDED
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-//  @interface
-//  Create a new rest_services_get
-FTY_TEMPLATE_REST_PRIVATE rest_services_get_t *
-    rest_services_get_new (void);
-
-//  Destroy the rest_services_get
-FTY_TEMPLATE_REST_PRIVATE void
-    rest_services_get_destroy (rest_services_get_t **self_p);
-
-
-//  @end
-
-#ifdef __cplusplus
-}
-#endif
-
-#endif
