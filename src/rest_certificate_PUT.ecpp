@@ -60,7 +60,7 @@ UserInfo user;
     Path path(request.getPathInfo());
     // extract service name from the path:
     // <URL_PREFIX>/services/<service_name>/certificate
-    const std::string &serviceName = path.getItem(URL_PREFIX_SIZE + 2);
+    const std::string &serviceName = path.getItem(URL_PREFIX_SIZE + 1);
 
     std::string certificatePem = "";
 
