@@ -62,8 +62,7 @@ UserInfo user;
         mlm::MlmSyncClient syncClient(CLIENT_ID, DESTINATION, 1000, END_POINT);
         CertGenAccessor cgAccessor(syncClient);
 
-        // std::string csrCreationTime = cgAccessor.getPendingCsr(serviceName).getPem();
-        std::string csrCreationTime = "123456";
+        std::string csrCreationTime = std::to_string(cgAccessor.getPendingCsrCreationDate(serviceName));
         
         cxxtools::SerializationInfo si;
         si.addMember("csr_creation_date") <<= csrCreationTime;
