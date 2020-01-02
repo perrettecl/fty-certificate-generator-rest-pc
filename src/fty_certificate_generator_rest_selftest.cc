@@ -1,3 +1,5 @@
+//Note: This is file has been customized in 2 sections (headers and end of the file)
+//      to avoid memory leak detection from protobuf
 /*  =========================================================================
     fty_certificate_generator_rest_selftest.c - run selftests
 
@@ -28,6 +30,9 @@
 */
 
 #include "fty_certificate_generator_rest_classes.h"
+
+//Note: This is to avoid memory leak detection from protobuf
+#include <google/protobuf/util/json_util.h>
 
 typedef struct {
     const char *testname;           // test name, can be called from command line this way
@@ -182,6 +187,9 @@ main (int argc, char **argv)
     }
     else
         test_runall (verbose);
+
+//Note: This is to avoid memory leak detection from protobuf
+    google::protobuf::ShutdownProtobufLibrary();
 
     return 0;
 }
