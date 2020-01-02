@@ -48,6 +48,9 @@ BuildRequires:  libtool
 BuildRequires:  pkgconfig
 BuildRequires:  xmlto
 BuildRequires:  gcc-c++
+BuildRequires:  libsodium-devel
+BuildRequires:  zeromq-devel
+BuildRequires:  czmq-devel >= 3.0.2
 BuildRequires:  cxxtools-devel
 BuildRequires:  cyrus-sasl-devel
 BuildRequires:  tntdb-devel
