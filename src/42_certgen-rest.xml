@@ -1,0 +1,59 @@
+<!-- Services -->
+    <!-- Get the list of available services -->
+    <mapping>
+      <target>rest_services_GET@libfty_certificate_generator_rest</target>
+      <url>^/api/v1/admin/internal-certificate/services$</url>
+      <method>GET</method>
+    </mapping>
+
+<!-- Service -->
+    <!-- Read the current status (pending CSR) -->
+    <mapping>
+      <target>rest_service_GET@libfty_certificate_generator_rest</target>
+      <url>^/api/v1/admin/internal-certificate/services/([a-zA-Z0-9_-]+)$</url>
+      <method>GET</method>
+    </mapping>
+
+<!-- Certificates -->
+    <!-- Generate new self-signed certificate -->
+    <mapping>
+      <target>rest_certificate_POST@libfty_certificate_generator_rest</target>
+      <url>^/api/v1/admin/internal-certificate/services/([a-zA-Z0-9_-]+)/certificate$</url>
+      <method>POST</method>
+    </mapping>
+
+    <!-- Returns the PEM representation of the certificate associated to the service -->
+    <mapping>
+      <target>rest_certificate_GET@libfty_certificate_generator_rest</target>
+      <url>^/api/v1/admin/internal-certificate/services/([a-zA-Z0-9_-]+)/certificate$</url>
+      <method>GET</method>
+    </mapping>
+
+    <!-- Update document -->
+    <mapping>
+      <target>rest_certificate_PUT@libfty_certificate_generator_rest</target>
+      <url>^/api/v1/admin/internal-certificate/services/([a-zA-Z0-9_-]+)/certificate$</url>
+      <method>PUT</method>
+    </mapping>
+
+<!-- CSR -->
+    <!-- Generate new CSR for specified service -->
+    <mapping>
+      <target>rest_csr_POST@libfty_certificate_generator_rest</target>
+      <url>^/api/v1/admin/internal-certificate/services/([a-zA-Z0-9_-]+)/csr$</url>
+      <method>POST</method>
+    </mapping>
+
+    <!-- Returns the PEM of the pending CSR for specified service, if exists -->
+    <mapping>
+      <target>rest_csr_GET@libfty_certificate_generator_rest</target>
+      <url>^/api/v1/admin/internal-certificate/services/([a-zA-Z0-9_-]+)/csr$</url>
+      <method>GET</method>
+    </mapping>
+
+    <!-- Delete CSR for specified service -->
+    <mapping>
+      <target>rest_csr_DELETE@libfty_certificate_generator_rest</target>
+      <url>^/api/v1/admin/internal-certificate/services/([a-zA-Z0-9_-]+)/csr$</url>
+      <method>DELETE</method>
+    </mapping>

@@ -1,0 +1,106 @@
+<#
+ #
+ # Copyright (C) 2019 Eaton
+ #
+ # This program is free software; you can redistribute it and/or modify
+ # it under the terms of the GNU General Public License as published by
+ # the Free Software Foundation; either version 2 of the License, or
+ # (at your option) any later version.
+ #
+ # This program is distributed in the hope that it will be useful,
+ # but WITHOUT ANY WARRANTY; without even the implied warranty of
+ # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ # GNU General Public License for more details.
+ #
+ # You should have received a copy of the GNU General Public License along
+ # with this program; if not, write to the Free Software Foundation, Inc.,
+ # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ #
+ #><#
+/*!
+ * \file rest_certificate_PUT.ecpp
+ * \author Mauro Guerrera <mauroguerrera@eaton.com>
+ * \brief Implementation of rest handler for certificate generator
+ *        PUT - import signed certitificate against existing CSR
+ */
+ #><%pre>
+#include <map>
+#include <string>
+#include <sstream>
+
+#include <fty_common.h>
+#include <fty_common_mlm.h>
+#include <fty_common_rest.h>
+#include <fty-certificate-generator.h>
+#include <certgen_accessor.h>
+#include <cxxtools/jsonserializer.h>
+
+#include "helpers_certificate_generator_rest.h"
+
+</%pre>
+<%request scope="global">
+UserInfo user;
+</%request>
+<%cpp>
+    using namespace certgen;
+    using namespace restapi;
+
+    // check if we can execute
+    static const std::map<BiosProfile, std::string> PERMISSIONS = {
+        {BiosProfile::Admin, "U"}};
+
+    CHECK_USER_PERMISSIONS_OR_DIE(PERMISSIONS);
+
+    // check re-auth
+    if (!user.reauth())
+    {
+        http_die("internal-error", "Wrong confirmation password");
+    }
+
+    Path path(request.getPathInfo());
+    // extract service name from the path:
+    // <URL_PREFIX>/services/<service_name>/certificate
+    const std::string &serviceName = path.getItem(URL_PREFIX_SIZE + 1);
+
+    std::string certificatePem = "";
+
+    try
+    {
+        mlm::MlmSyncClient syncClient(CLIENT_ID, DESTINATION, 1000, END_POINT);
+        CertGenAccessor cgAccessor(syncClient);
+
+        cxxtools::SerializationInfo si;
+      
+        try
+        {
+            std::stringstream bodyStr;
+            bodyStr << request.getBody();
+            cxxtools::JsonDeserializer deserializer(bodyStr);
+            deserializer.deserialize(si);
+        }
+        catch(const std::exception& e)
+        {
+            throw std::runtime_error("Error in request body: "+std::string(e.what()));
+        }
+
+        std::string certificatePem = "";
+        si.getMember("certificate_pem") >>= certificatePem;
+
+        cgAccessor.importCertificate(serviceName, certificatePem);
+
+        log_info_audit("Request PUT internal-certificate -> import signed certificate");
+        reply.out() << "{}";
+    }
+    catch (const std::exception &e)
+    {
+        log_info_audit(
+            "Request PUT internal-certificate -> import signed certificate FAILED");
+        
+        std::string msg = TRANSLATE_ME(
+            "Error while importing signed certificate for service %s: %s",
+            serviceName.c_str(), JSONIFY(e.what()).c_str());
+        
+        http_die("internal-error", msg.c_str());
+    }
+
+</%cpp>

@@ -13,7 +13,7 @@
 # Process this file with autoconf to produce a configure script.
 AC_PREREQ(2.61)
 #
-AC_INIT([fty-template-rest],[1.0.0],[eatonipcopensource@eaton.com])
+AC_INIT([fty-certificate-generator-rest],[1.0.0],[eatonipcopensource@eaton.com])
 
 AC_CONFIG_AUX_DIR(config)
 AC_CONFIG_MACRO_DIR(config)
@@ -26,11 +26,11 @@ PV_MAJOR=`echo $PACKAGE_VERSION | cut -d . -f 1`
 PV_MINOR=`echo $PACKAGE_VERSION | cut -d . -f 2`
 PV_PATCH=`echo $PACKAGE_VERSION | cut -d . -f 3`
 AC_DEFINE_UNQUOTED([PACKAGE_VERSION_MAJOR],[$PV_MAJOR],
-    [FTY_TEMPLATE_REST major version])
+    [FTY_CERTIFICATE_GENERATOR_REST major version])
 AC_DEFINE_UNQUOTED([PACKAGE_VERSION_MINOR],[$PV_MINOR],
-    [FTY_TEMPLATE_REST minor version])
+    [FTY_CERTIFICATE_GENERATOR_REST minor version])
 AC_DEFINE_UNQUOTED([PACKAGE_VERSION_PATCH],[$PV_PATCH],
-    [FTY_TEMPLATE_REST patchlevel])
+    [FTY_CERTIFICATE_GENERATOR_REST patchlevel])
 # This lets us use PACKAGE_VERSION in Makefiles
 AC_SUBST(PACKAGE_VERSION)
 
@@ -41,7 +41,7 @@ AC_SUBST(PACKAGE_VERSION)
 # know exactly what you're doing and have read and understand
 # http://www.gnu.org/software/libtool/manual/html_node/Updating-version-info.html
 #
-# libfty_template_rest -version-info
+# libfty_certificate_generator_rest -version-info
 LTVER="1:0:0"
 AC_SUBST(LTVER)
 
@@ -49,7 +49,7 @@ AC_SUBST(LTVER)
 AM_CONDITIONAL([USING_VPATH], [test "x${srcdir}" != "x."])
 
 # Capture c flags
-FTY_TEMPLATE_REST_ORIG_CFLAGS="${CFLAGS:-none}"
+FTY_CERTIFICATE_GENERATOR_REST_ORIG_CFLAGS="${CFLAGS:-none}"
 
 # Checks for programs
 AC_PROG_CC
@@ -75,13 +75,13 @@ AM_CONDITIONAL(WITH_CPPCHECK, $WITH_CPPCHECK)
 AC_MSG_CHECKING([whether to enable GCov])
 AC_ARG_WITH(gcov, [AS_HELP_STRING([--with-gcov=yes/no],
                   [With GCC Code Coverage reporting])],
-                  [FTY_TEMPLATE_REST_GCOV="$withval"])
+                  [FTY_CERTIFICATE_GENERATOR_REST_GCOV="$withval"])
 
-if test "x${FTY_TEMPLATE_REST_GCOV}" == "xyes"; then
+if test "x${FTY_CERTIFICATE_GENERATOR_REST_GCOV}" == "xyes"; then
     CFLAGS="-O0 -g -fprofile-arcs -ftest-coverage"
 
-    if test "x${FTY_TEMPLATE_REST_ORIG_CFLAGS}" != "xnone"; then
-        CFLAGS="${CFLAGS} ${FTY_TEMPLATE_REST_ORIG_CFLAGS}"
+    if test "x${FTY_CERTIFICATE_GENERATOR_REST_ORIG_CFLAGS}" != "xnone"; then
+        CFLAGS="${CFLAGS} ${FTY_CERTIFICATE_GENERATOR_REST_ORIG_CFLAGS}"
     fi
     AM_CONDITIONAL(WITH_GCOV, true)
     AC_MSG_RESULT([yes])
@@ -94,9 +94,9 @@ fi
 AC_MSG_CHECKING([whether to enable ASan])
 AC_ARG_ENABLE(address-sanitizer, [AS_HELP_STRING([--enable-address-sanitizer=yes/no],
                   [Build with GCC Address Sanitizer instrumentation])],
-                  [FTY_TEMPLATE_REST_ASAN="$enableval"])
+                  [FTY_CERTIFICATE_GENERATOR_REST_ASAN="$enableval"])
 
-if test "x${FTY_TEMPLATE_REST_ASAN}" == "xyes"; then
+if test "x${FTY_CERTIFICATE_GENERATOR_REST_ASAN}" == "xyes"; then
     CFLAGS="${CFLAGS} -fsanitize=address"
     CXXFLAGS="${CXXFLAGS} -fsanitize=address"
 
@@ -183,7 +183,7 @@ AS_CASE([x"${with_libsasl2}"],
 dnl We do not abort right now, because the maintainer/developer may have
 dnl something particular in mind, e.g. to build just parts of a project.
 AS_IF([test x"${search_libsasl2}" = xno],
-    [AC_MSG_WARN([Required dependency on libsasl2 was explicitly disabled during configuration by '--with-libsasl2=no'; subsequent full build of fty-template-rest may fail])])
+    [AC_MSG_WARN([Required dependency on libsasl2 was explicitly disabled during configuration by '--with-libsasl2=no'; subsequent full build of fty-certificate-generator-rest may fail])])
 
 AS_IF([test x"${search_libsasl2}" = xyes], [
     # Archive previously detected and supplied flags
@@ -244,7 +244,7 @@ AS_CASE([x"${with_tntdb}"],
 dnl We do not abort right now, because the maintainer/developer may have
 dnl something particular in mind, e.g. to build just parts of a project.
 AS_IF([test x"${search_tntdb}" = xno],
-    [AC_MSG_WARN([Required dependency on tntdb was explicitly disabled during configuration by '--with-tntdb=no'; subsequent full build of fty-template-rest may fail])])
+    [AC_MSG_WARN([Required dependency on tntdb was explicitly disabled during configuration by '--with-tntdb=no'; subsequent full build of fty-certificate-generator-rest may fail])])
 
 AS_IF([test x"${search_tntdb}" = xyes], [
     # Archive previously detected and supplied flags
@@ -305,7 +305,7 @@ AS_CASE([x"${with_cxxtools}"],
 dnl We do not abort right now, because the maintainer/developer may have
 dnl something particular in mind, e.g. to build just parts of a project.
 AS_IF([test x"${search_cxxtools}" = xno],
-    [AC_MSG_WARN([Required dependency on cxxtools was explicitly disabled during configuration by '--with-cxxtools=no'; subsequent full build of fty-template-rest may fail])])
+    [AC_MSG_WARN([Required dependency on cxxtools was explicitly disabled during configuration by '--with-cxxtools=no'; subsequent full build of fty-certificate-generator-rest may fail])])
 
 AS_IF([test x"${search_cxxtools}" = xyes], [
     # Archive previously detected and supplied flags
@@ -344,6 +344,67 @@ dnl END of PKG_CHECK_MODULES and/or direct tests for cxxtools
 dnl END of enabled attempts to search for cxxtools
 
 
+was_fty_common_check_lib_detected=no
+
+search_libfty_common="yes"
+
+AC_ARG_WITH([libfty_common],
+    [
+        AS_HELP_STRING([--with-libfty_common],
+        [yes or no. Optionally specify libfty_common prefix (directory where its include/ and lib/ are located), but that is only used if pkgconfig metadata is not found first])
+    ],
+    [
+        search_libfty_common="yes"
+    ],
+    [
+        search_libfty_common="yes"
+    ])
+AS_CASE([x"${with_libfty_common}"],
+    [xyes], [search_libfty_common="yes"],
+    [xno],  [search_libfty_common="no"])
+
+dnl We do not abort right now, because the maintainer/developer may have
+dnl something particular in mind, e.g. to build just parts of a project.
+AS_IF([test x"${search_libfty_common}" = xno],
+    [AC_MSG_WARN([Required dependency on fty_common was explicitly disabled during configuration by '--with-libfty_common=no'; subsequent full build of fty-certificate-generator-rest may fail])])
+
+AS_IF([test x"${search_libfty_common}" = xyes], [
+    # Archive previously detected and supplied flags
+    PRE_SEARCH_CFLAGS="${CFLAGS}"
+    PRE_SEARCH_LIBS="${LIBS}"
+
+    found_pkgconfig=""
+    PKG_CHECK_MODULES([fty_common], [libfty_common >= 0.0.0],
+    [
+        was_fty_common_check_lib_detected=pkgcfg
+        found_pkgconfig="libfty_common"
+    ],
+    [
+        AC_MSG_WARN([Attribute 'test' is not set on zproject dependency 'fty-common' - please ensure it is set])
+    ])
+
+dnl END of PKG_CHECK_MODULES and/or direct tests for libfty_common
+    AS_CASE(["x${was_fty_common_check_lib_detected}"],
+        [xpkgcfg], [
+                PKGCFG_NAMES_PRIVATE="$PKGCFG_NAMES_PRIVATE ${found_pkgconfig}"
+                CFLAGS="${fty_common_CFLAGS} ${CFLAGS}"
+                LIBS="${fty_common_LIBS} ${LIBS}"
+            ],
+        [xyes], [
+                CFLAGS="${fty_common_synthetic_cflags} ${CFLAGS}"
+                LDFLAGS="${fty_common_synthetic_libs} ${LDFLAGS}"
+                LIBS="${fty_common_synthetic_libs} ${LIBS}"
+
+                AC_SUBST([fty_common_CFLAGS],[${fty_common_synthetic_cflags}])
+                AC_SUBST([fty_common_LIBS],[${fty_common_synthetic_libs}])
+            ],
+        [xno], [
+            AC_MSG_ERROR([Cannot find pkg-config metadata for libfty_common 0.0.0 or higher])
+    ])
+])
+dnl END of enabled attempts to search for libfty_common
+
+
 was_fty_common_logging_check_lib_detected=no
 
 search_libfty_common_logging="yes"
@@ -366,7 +427,7 @@ AS_CASE([x"${with_libfty_common_logging}"],
 dnl We do not abort right now, because the maintainer/developer may have
 dnl something particular in mind, e.g. to build just parts of a project.
 AS_IF([test x"${search_libfty_common_logging}" = xno],
-    [AC_MSG_WARN([Required dependency on fty_common_logging was explicitly disabled during configuration by '--with-libfty_common_logging=no'; subsequent full build of fty-template-rest may fail])])
+    [AC_MSG_WARN([Required dependency on fty_common_logging was explicitly disabled during configuration by '--with-libfty_common_logging=no'; subsequent full build of fty-certificate-generator-rest may fail])])
 
 AS_IF([test x"${search_libfty_common_logging}" = xyes], [
     # Archive previously detected and supplied flags
@@ -427,7 +488,7 @@ AS_CASE([x"${with_libfty_common_rest}"],
 dnl We do not abort right now, because the maintainer/developer may have
 dnl something particular in mind, e.g. to build just parts of a project.
 AS_IF([test x"${search_libfty_common_rest}" = xno],
-    [AC_MSG_WARN([Required dependency on fty_common_rest was explicitly disabled during configuration by '--with-libfty_common_rest=no'; subsequent full build of fty-template-rest may fail])])
+    [AC_MSG_WARN([Required dependency on fty_common_rest was explicitly disabled during configuration by '--with-libfty_common_rest=no'; subsequent full build of fty-certificate-generator-rest may fail])])
 
 AS_IF([test x"${search_libfty_common_rest}" = xyes], [
     # Archive previously detected and supplied flags
@@ -466,6 +527,128 @@ dnl END of PKG_CHECK_MODULES and/or direct tests for libfty_common_rest
 dnl END of enabled attempts to search for libfty_common_rest
 
 
+was_fty_common_mlm_check_lib_detected=no
+
+search_libfty_common_mlm="yes"
+
+AC_ARG_WITH([libfty_common_mlm],
+    [
+        AS_HELP_STRING([--with-libfty_common_mlm],
+        [yes or no. Optionally specify libfty_common_mlm prefix (directory where its include/ and lib/ are located), but that is only used if pkgconfig metadata is not found first])
+    ],
+    [
+        search_libfty_common_mlm="yes"
+    ],
+    [
+        search_libfty_common_mlm="yes"
+    ])
+AS_CASE([x"${with_libfty_common_mlm}"],
+    [xyes], [search_libfty_common_mlm="yes"],
+    [xno],  [search_libfty_common_mlm="no"])
+
+dnl We do not abort right now, because the maintainer/developer may have
+dnl something particular in mind, e.g. to build just parts of a project.
+AS_IF([test x"${search_libfty_common_mlm}" = xno],
+    [AC_MSG_WARN([Required dependency on fty_common_mlm was explicitly disabled during configuration by '--with-libfty_common_mlm=no'; subsequent full build of fty-certificate-generator-rest may fail])])
+
+AS_IF([test x"${search_libfty_common_mlm}" = xyes], [
+    # Archive previously detected and supplied flags
+    PRE_SEARCH_CFLAGS="${CFLAGS}"
+    PRE_SEARCH_LIBS="${LIBS}"
+
+    found_pkgconfig=""
+    PKG_CHECK_MODULES([fty_common_mlm], [libfty_common_mlm >= 0.0.0],
+    [
+        was_fty_common_mlm_check_lib_detected=pkgcfg
+        found_pkgconfig="libfty_common_mlm"
+    ],
+    [
+        AC_MSG_WARN([Attribute 'test' is not set on zproject dependency 'fty-common-mlm' - please ensure it is set])
+    ])
+
+dnl END of PKG_CHECK_MODULES and/or direct tests for libfty_common_mlm
+    AS_CASE(["x${was_fty_common_mlm_check_lib_detected}"],
+        [xpkgcfg], [
+                PKGCFG_NAMES_PRIVATE="$PKGCFG_NAMES_PRIVATE ${found_pkgconfig}"
+                CFLAGS="${fty_common_mlm_CFLAGS} ${CFLAGS}"
+                LIBS="${fty_common_mlm_LIBS} ${LIBS}"
+            ],
+        [xyes], [
+                CFLAGS="${fty_common_mlm_synthetic_cflags} ${CFLAGS}"
+                LDFLAGS="${fty_common_mlm_synthetic_libs} ${LDFLAGS}"
+                LIBS="${fty_common_mlm_synthetic_libs} ${LIBS}"
+
+                AC_SUBST([fty_common_mlm_CFLAGS],[${fty_common_mlm_synthetic_cflags}])
+                AC_SUBST([fty_common_mlm_LIBS],[${fty_common_mlm_synthetic_libs}])
+            ],
+        [xno], [
+            AC_MSG_ERROR([Cannot find pkg-config metadata for libfty_common_mlm 0.0.0 or higher])
+    ])
+])
+dnl END of enabled attempts to search for libfty_common_mlm
+
+
+was_fty_certificate_generator_check_lib_detected=no
+
+search_libfty_certificate_generator="yes"
+
+AC_ARG_WITH([libfty_certificate_generator],
+    [
+        AS_HELP_STRING([--with-libfty_certificate_generator],
+        [yes or no. Optionally specify libfty_certificate_generator prefix (directory where its include/ and lib/ are located), but that is only used if pkgconfig metadata is not found first])
+    ],
+    [
+        search_libfty_certificate_generator="yes"
+    ],
+    [
+        search_libfty_certificate_generator="yes"
+    ])
+AS_CASE([x"${with_libfty_certificate_generator}"],
+    [xyes], [search_libfty_certificate_generator="yes"],
+    [xno],  [search_libfty_certificate_generator="no"])
+
+dnl We do not abort right now, because the maintainer/developer may have
+dnl something particular in mind, e.g. to build just parts of a project.
+AS_IF([test x"${search_libfty_certificate_generator}" = xno],
+    [AC_MSG_WARN([Required dependency on fty_certificate_generator was explicitly disabled during configuration by '--with-libfty_certificate_generator=no'; subsequent full build of fty-certificate-generator-rest may fail])])
+
+AS_IF([test x"${search_libfty_certificate_generator}" = xyes], [
+    # Archive previously detected and supplied flags
+    PRE_SEARCH_CFLAGS="${CFLAGS}"
+    PRE_SEARCH_LIBS="${LIBS}"
+
+    found_pkgconfig=""
+    PKG_CHECK_MODULES([fty_certificate_generator], [libfty_certificate_generator >= 0.0.0],
+    [
+        was_fty_certificate_generator_check_lib_detected=pkgcfg
+        found_pkgconfig="libfty_certificate_generator"
+    ],
+    [
+        AC_MSG_WARN([Attribute 'test' is not set on zproject dependency 'fty-certificate-generator' - please ensure it is set])
+    ])
+
+dnl END of PKG_CHECK_MODULES and/or direct tests for libfty_certificate_generator
+    AS_CASE(["x${was_fty_certificate_generator_check_lib_detected}"],
+        [xpkgcfg], [
+                PKGCFG_NAMES_PRIVATE="$PKGCFG_NAMES_PRIVATE ${found_pkgconfig}"
+                CFLAGS="${fty_certificate_generator_CFLAGS} ${CFLAGS}"
+                LIBS="${fty_certificate_generator_LIBS} ${LIBS}"
+            ],
+        [xyes], [
+                CFLAGS="${fty_certificate_generator_synthetic_cflags} ${CFLAGS}"
+                LDFLAGS="${fty_certificate_generator_synthetic_libs} ${LDFLAGS}"
+                LIBS="${fty_certificate_generator_synthetic_libs} ${LIBS}"
+
+                AC_SUBST([fty_certificate_generator_CFLAGS],[${fty_certificate_generator_synthetic_cflags}])
+                AC_SUBST([fty_certificate_generator_LIBS],[${fty_certificate_generator_synthetic_libs}])
+            ],
+        [xno], [
+            AC_MSG_ERROR([Cannot find pkg-config metadata for libfty_certificate_generator 0.0.0 or higher])
+    ])
+])
+dnl END of enabled attempts to search for libfty_certificate_generator
+
+
 CFLAGS="${PREVIOUS_CFLAGS}"
 LIBS="${PREVIOUS_LIBS}"
 
@@ -473,11 +656,11 @@ AC_SUBST(pkg_config_libs_private, $PKGCFG_LIBS_PRIVATE)
 AC_SUBST(pkg_config_names_private, $PKGCFG_NAMES_PRIVATE)
 
 # Platform specific checks
-fty_template_rest_on_mingw32="no"
-fty_template_rest_on_cygwin="no"
-fty_template_rest_on_android="no"
-fty_template_rest_on_linux="no"
-fty_template_rest_on_gnu="no"
+fty_certificate_generator_rest_on_mingw32="no"
+fty_certificate_generator_rest_on_cygwin="no"
+fty_certificate_generator_rest_on_android="no"
+fty_certificate_generator_rest_on_linux="no"
+fty_certificate_generator_rest_on_gnu="no"
 
 # Host specific checks
 AC_CANONICAL_HOST
@@ -490,49 +673,49 @@ AC_ARG_WITH([docs],
     [with_docs=$withval])
 
 if test "x$with_docs" = "xno"; then
-    fty_template_rest_build_doc="no"
-    fty_template_rest_install_man="no"
+    fty_certificate_generator_rest_build_doc="no"
+    fty_certificate_generator_rest_install_man="no"
 else
     # Determine whether or not documentation should be built and installed.
-    fty_template_rest_build_doc="yes"
-    fty_template_rest_install_man="yes"
+    fty_certificate_generator_rest_build_doc="yes"
+    fty_certificate_generator_rest_install_man="yes"
 
     # Check for asciidoc and xmlto and don't build the docs if these are not installed.
-    AC_CHECK_PROG(fty_template_rest_have_asciidoc, asciidoc, yes, no)
-    AC_CHECK_PROG(fty_template_rest_have_xmlto, xmlto, yes, no)
-    if test "x$fty_template_rest_have_asciidoc" = "xno" -o "x$fty_template_rest_have_xmlto" = "xno"; then
+    AC_CHECK_PROG(fty_certificate_generator_rest_have_asciidoc, asciidoc, yes, no)
+    AC_CHECK_PROG(fty_certificate_generator_rest_have_xmlto, xmlto, yes, no)
+    if test "x$fty_certificate_generator_rest_have_asciidoc" = "xno" -o "x$fty_certificate_generator_rest_have_xmlto" = "xno"; then
         if test "x$with_docs" = "xyes" ; then
             AC_MSG_ERROR([Build with docs was explicitly requested, but tools are not available])
         fi
-        fty_template_rest_build_doc="no"
+        fty_certificate_generator_rest_build_doc="no"
         # Tarballs built with 'make dist' ship with prebuilt documentation.
-        if ! test -f doc/fty-template-rest.7; then
-            fty_template_rest_install_man="no"
-            AC_MSG_WARN([You are building an unreleased version of FTY-TEMPLATE-REST and asciidoc or xmlto are not installed.])
+        if ! test -f doc/fty-certificate-generator-rest.7; then
+            fty_certificate_generator_rest_install_man="no"
+            AC_MSG_WARN([You are building an unreleased version of FTY-CERTIFICATE-GENERATOR-REST and asciidoc or xmlto are not installed.])
             AC_MSG_WARN([Documentation will not be built and manual pages will not be installed.])
         fi
     fi
 fi
 AC_MSG_CHECKING([whether to build documentation])
-AC_MSG_RESULT([$fty_template_rest_build_doc])
+AC_MSG_RESULT([$fty_certificate_generator_rest_build_doc])
 AC_MSG_CHECKING([whether to install manpages])
-AC_MSG_RESULT([$fty_template_rest_install_man])
+AC_MSG_RESULT([$fty_certificate_generator_rest_install_man])
 
-# Set some default features required by libfty_template_rest code.
-CPPFLAGS="-DFTY_TEMPLATE_REST_INTERNAL_BUILD -D_REENTRANT -D_THREAD_SAFE $CPPFLAGS"
+# Set some default features required by libfty_certificate_generator_rest code.
+CPPFLAGS="-DFTY_CERTIFICATE_GENERATOR_REST_INTERNAL_BUILD -D_REENTRANT -D_THREAD_SAFE $CPPFLAGS"
 
 # OS-specific tests
 case "${host_os}" in
     *linux*)
         # Define on Linux to enable all library features
         CPPFLAGS="-D_GNU_SOURCE -DLINUX $CPPFLAGS"
-        AC_DEFINE(FTY_TEMPLATE_REST_HAVE_LINUX, 1, [Have Linux OS])
-        fty_template_rest_on_linux="yes"
+        AC_DEFINE(FTY_CERTIFICATE_GENERATOR_REST_HAVE_LINUX, 1, [Have Linux OS])
+        fty_certificate_generator_rest_on_linux="yes"
 
         case "${host_os}" in
             *android*)
-                AC_DEFINE(FTY_TEMPLATE_REST_HAVE_ANDROID, 1, [Have Android OS])
-                fty_template_rest_on_android="yes"
+                AC_DEFINE(FTY_CERTIFICATE_GENERATOR_REST_HAVE_ANDROID, 1, [Have Android OS])
+                fty_certificate_generator_rest_on_android="yes"
             ;;
         esac
         ;;
@@ -541,74 +724,74 @@ case "${host_os}" in
         CPPFLAGS="-D_PTHREADS $CPPFLAGS"
         # Allow definitions of common OS-provided functions that are not in old standards
         CPPFLAGS="-D__EXTENSIONS__ $CPPFLAGS"
-        AC_DEFINE(FTY_TEMPLATE_REST_HAVE_SOLARIS, 1, [Have Solaris OS])
+        AC_DEFINE(FTY_CERTIFICATE_GENERATOR_REST_HAVE_SOLARIS, 1, [Have Solaris OS])
         CFLAGS="${CFLAGS} -lsocket -lssp"
         ;;
     *freebsd*)
         # Define on FreeBSD to enable all library features
         CPPFLAGS="-D__BSD_VISIBLE $CPPFLAGS"
-        AC_DEFINE(FTY_TEMPLATE_REST_HAVE_FREEBSD, 1, [Have FreeBSD OS])
+        AC_DEFINE(FTY_CERTIFICATE_GENERATOR_REST_HAVE_FREEBSD, 1, [Have FreeBSD OS])
         ;;
     *darwin*)
         # Define on Darwin to enable all library features
         CPPFLAGS="-D_DARWIN_C_SOURCE $CPPFLAGS"
-        AC_DEFINE(FTY_TEMPLATE_REST_HAVE_OSX, 1, [Have DarwinOSX OS])
+        AC_DEFINE(FTY_CERTIFICATE_GENERATOR_REST_HAVE_OSX, 1, [Have DarwinOSX OS])
         ;;
     *netbsd*)
         # Define on NetBSD to enable all library features
         CPPFLAGS="-D_NETBSD_SOURCE $CPPFLAGS"
-        AC_DEFINE(FTY_TEMPLATE_REST_HAVE_NETBSD, 1, [Have NetBSD OS])
+        AC_DEFINE(FTY_CERTIFICATE_GENERATOR_REST_HAVE_NETBSD, 1, [Have NetBSD OS])
         ;;
     *openbsd*)
         # Define on OpenBSD to enable all library features
         CPPFLAGS="-D_BSD_SOURCE $CPPFLAGS"
-        AC_DEFINE(FTY_TEMPLATE_REST_HAVE_OPENBSD, 1, [Have OpenBSD OS])
+        AC_DEFINE(FTY_CERTIFICATE_GENERATOR_REST_HAVE_OPENBSD, 1, [Have OpenBSD OS])
         ;;
     *nto-qnx*)
-        AC_DEFINE(FTY_TEMPLATE_REST_HAVE_QNXNTO, 1, [Have QNX Neutrino OS])
+        AC_DEFINE(FTY_CERTIFICATE_GENERATOR_REST_HAVE_QNXNTO, 1, [Have QNX Neutrino OS])
         ;;
     *aix*)
-        AC_DEFINE(FTY_TEMPLATE_REST_HAVE_AIX, 1, [Have AIX OS])
+        AC_DEFINE(FTY_CERTIFICATE_GENERATOR_REST_HAVE_AIX, 1, [Have AIX OS])
         ;;
     *hpux*)
         # Define on HP-UX to enable all library features
         CPPFLAGS="-D_POSIX_C_SOURCE=200112L"
-        AC_DEFINE(FTY_TEMPLATE_REST_HAVE_HPUX, 1, [Have HPUX OS])
+        AC_DEFINE(FTY_CERTIFICATE_GENERATOR_REST_HAVE_HPUX, 1, [Have HPUX OS])
         ;;
     *mingw32*)
         # Disable format error due to incomplete ANSI C
         CFLAGS="-Wno-error=format -Wno-unused-function -Wno-unused-variable -D_XOPEN_SOURCE $CFLAGS"
         CPPFLAGS="-Wno-error=format -Wno-unused-function -Wno-unused-variable -D_XOPEN_SOURCE $CPPFLAGS"
-        AC_DEFINE(FTY_TEMPLATE_REST_HAVE_WINDOWS, 1, [Have Windows OS])
-        AC_DEFINE(FTY_TEMPLATE_REST_HAVE_MINGW32, 1, [Have MinGW32])
+        AC_DEFINE(FTY_CERTIFICATE_GENERATOR_REST_HAVE_WINDOWS, 1, [Have Windows OS])
+        AC_DEFINE(FTY_CERTIFICATE_GENERATOR_REST_HAVE_MINGW32, 1, [Have MinGW32])
         AC_CHECK_HEADERS(windows.h)
-        fty_template_rest_on_mingw32="yes"
-        fty_template_rest_install_man="no"
+        fty_certificate_generator_rest_on_mingw32="yes"
+        fty_certificate_generator_rest_install_man="no"
         ;;
     *mingw64*)
         # Define on MINGW64 to enable all libeary features
         # Disable format error due to incomplete ANSI C
         CFLAGS="-Wno-error=format -Wno-unused-function -Wno-unused-variable -D_XOPEN_SOURCE $CFLAGS"
         CPPFLAGS="-Wno-error=format -Wno-unused-function -Wno-unused-variable -D_XOPEN_SOURCE $CPPFLAGS"
-        AC_DEFINE(FTY_TEMPLATE_REST_HAVE_WINDOWS, 1, [Have Windows OS])
-        AC_DEFINE(FTY_TEMPLATE_REST_HAVE_MINGW32, 1, [Have MinGW32])
+        AC_DEFINE(FTY_CERTIFICATE_GENERATOR_REST_HAVE_WINDOWS, 1, [Have Windows OS])
+        AC_DEFINE(FTY_CERTIFICATE_GENERATOR_REST_HAVE_MINGW32, 1, [Have MinGW32])
         AC_CHECK_HEADERS(windows.h)
-        fty_template_rest_on_mingw32="yes"
-        fty_template_rest_install_man="no"
+        fty_certificate_generator_rest_on_mingw32="yes"
+        fty_certificate_generator_rest_install_man="no"
         ;;
     *cygwin*)
         # Define on Cygwin to enable all library features
         CPPFLAGS="-D_GNU_SOURCE $CPPFLAGS"
-        AC_DEFINE(FTY_TEMPLATE_REST_HAVE_CYGWIN, 1, [Have Cygwin])
-        fty_template_rest_on_cygwin="yes"
+        AC_DEFINE(FTY_CERTIFICATE_GENERATOR_REST_HAVE_CYGWIN, 1, [Have Cygwin])
+        fty_certificate_generator_rest_on_cygwin="yes"
         ;;
     gnu*)
         # Define on GNU/Hurd to enable all library features
         if test "x$GXX" = "xyes"; then
             CPPFLAGS="-D_GNU_SOURCE $CPPFLAGS"
         fi
-        AC_DEFINE(FTY_TEMPLATE_REST_HAVE_GNU, 1, [Have GNU/Hurd OS])
-        fty_template_rest_on_gnu="yes"
+        AC_DEFINE(FTY_CERTIFICATE_GENERATOR_REST_HAVE_GNU, 1, [Have GNU/Hurd OS])
+        fty_certificate_generator_rest_on_gnu="yes"
         ;;
     *)
         AC_MSG_ERROR([unsupported system: ${host_os}])
@@ -640,13 +823,13 @@ AC_C_VOLATILE
 AC_C_BIGENDIAN
 
 AM_CONDITIONAL(ENABLE_SHARED, test "x$enable_shared" = "xyes")
-AM_CONDITIONAL(ON_MINGW, test "x$fty_template_rest_on_mingw32" = "xyes")
-AM_CONDITIONAL(ON_CYGWIN, test "x$fty_template_rest_on_cygwin" = "xyes")
-AM_CONDITIONAL(ON_ANDROID, test "x$fty_template_rest_on_android" = "xyes")
-AM_CONDITIONAL(ON_LINUX, test "x$fty_template_rest_on_linux" = "xyes")
-AM_CONDITIONAL(ON_GNU, test "x$fty_template_rest_on_gnu" = "xyes")
-AM_CONDITIONAL(INSTALL_MAN, test "x$fty_template_rest_install_man" = "xyes")
-AM_CONDITIONAL(BUILD_DOC, test "x$fty_template_rest_build_doc" = "xyes")
+AM_CONDITIONAL(ON_MINGW, test "x$fty_certificate_generator_rest_on_mingw32" = "xyes")
+AM_CONDITIONAL(ON_CYGWIN, test "x$fty_certificate_generator_rest_on_cygwin" = "xyes")
+AM_CONDITIONAL(ON_ANDROID, test "x$fty_certificate_generator_rest_on_android" = "xyes")
+AM_CONDITIONAL(ON_LINUX, test "x$fty_certificate_generator_rest_on_linux" = "xyes")
+AM_CONDITIONAL(ON_GNU, test "x$fty_certificate_generator_rest_on_gnu" = "xyes")
+AM_CONDITIONAL(INSTALL_MAN, test "x$fty_certificate_generator_rest_install_man" = "xyes")
+AM_CONDITIONAL(BUILD_DOC, test "x$fty_certificate_generator_rest_build_doc" = "xyes")
 
 AC_ARG_ENABLE([dist_cmakefiles],
     AS_HELP_STRING([--enable-dist_cmakefiles],
@@ -661,15 +844,15 @@ fi
      AC_MSG_RESULT([$enable_dist_cmakefiles])])
 AM_CONDITIONAL(ENABLE_DIST_CMAKEFILES, test "x$enable_dist_cmakefiles" = "xyes")
 
-# Check for fty_template_rest_selftest intent
-AC_ARG_ENABLE([fty_template_rest_selftest],
-    AS_HELP_STRING([--enable-fty_template_rest_selftest],
-        [Compile 'fty_template_rest_selftest' in src [default=yes]]),
-    [enable_fty_template_rest_selftest=$enableval],
-    [enable_fty_template_rest_selftest=yes])
+# Check for fty_certificate_generator_rest_selftest intent
+AC_ARG_ENABLE([fty_certificate_generator_rest_selftest],
+    AS_HELP_STRING([--enable-fty_certificate_generator_rest_selftest],
+        [Compile 'fty_certificate_generator_rest_selftest' in src [default=yes]]),
+    [enable_fty_certificate_generator_rest_selftest=$enableval],
+    [enable_fty_certificate_generator_rest_selftest=yes])
 
-AM_CONDITIONAL([ENABLE_FTY_TEMPLATE_REST_SELFTEST], [test x$enable_fty_template_rest_selftest != xno])
-AM_COND_IF([ENABLE_FTY_TEMPLATE_REST_SELFTEST], [AC_MSG_NOTICE([ENABLE_FTY_TEMPLATE_REST_SELFTEST defined])])
+AM_CONDITIONAL([ENABLE_FTY_CERTIFICATE_GENERATOR_REST_SELFTEST], [test x$enable_fty_certificate_generator_rest_selftest != xno])
+AM_COND_IF([ENABLE_FTY_CERTIFICATE_GENERATOR_REST_SELFTEST], [AC_MSG_NOTICE([ENABLE_FTY_CERTIFICATE_GENERATOR_REST_SELFTEST defined])])
 
 # Checks for library functions.
 AC_TYPE_SIGNAL
@@ -677,33 +860,14 @@ AC_CHECK_FUNCS(perror gettimeofday memset getifaddrs)
 
 
 # enable specific system integration features
-if test "x$cross_compiling" = "xyes"; then
-    #   Enable draft by default when cross-compiling
-    defaultval=yes
-else
-    # enable draft API by default if we're in a git repository
-    # else disable it by default; then allow --enable-drafts=yes/no override
-    AC_CHECK_FILE($srcdir/.git, [defaultval=yes],
-        [AC_MSG_CHECKING([running under a git repository workspace])
-         AS_IF([git rev-parse --show-toplevel 2>/dev/null],
-            [defaultval=yes],
-            [defaultval=no])
-         AC_MSG_RESULT($defaultval)
-        ])
-fi
-
-AC_ARG_ENABLE([drafts],
-    AS_HELP_STRING([--enable-drafts],
-        [Build and install draft classes and methods [default=yes]]),
-    [enable_drafts=$enableval],
-    [enable_drafts=$defaultval])
-
+#   Project has no stable classes so enable draft API by default
+enable_drafts=yes
 AM_CONDITIONAL([ENABLE_DRAFTS], [test x$enable_drafts != xno])
 
 if test "x$enable_drafts" = "xyes"; then
     AC_MSG_NOTICE([Building stable and legacy API + draft API])
-    AC_DEFINE(FTY_TEMPLATE_REST_BUILD_DRAFT_API, 1, [Provide draft classes and methods])
-    AC_SUBST(pkg_config_defines, "-DFTY_TEMPLATE_REST_BUILD_DRAFT_API=1")
+    AC_DEFINE(FTY_CERTIFICATE_GENERATOR_REST_BUILD_DRAFT_API, 1, [Provide draft classes and methods])
+    AC_SUBST(pkg_config_defines, "-DFTY_CERTIFICATE_GENERATOR_REST_BUILD_DRAFT_API=1")
 else
     AC_MSG_NOTICE([Building stable and legacy API (no draft API)])
     AC_SUBST(pkg_config_defines, "")
@@ -752,7 +916,7 @@ AS_IF([test "x$enable_Werror" = "xyes" || test "x$enable_Werror" = "xauto"],
 AC_CONFIG_FILES([Makefile
                  doc/Makefile
                  include/Makefile
-                 src/libfty_template_rest.pc
+                 src/libfty_certificate_generator_rest.pc
                 ])
 
 
@@ -793,13 +957,13 @@ echo C++ compiler.................. : $CXX
 echo C++ compiler flags............ : $CXXFLAGS
 echo Configure date................ : $BUILD_DATE
 echo Build architecture............ : $BUILD_ARCH
-echo Build docs.................... : $fty_template_rest_build_doc
+echo Build docs.................... : $fty_certificate_generator_rest_build_doc
 echo Build host.................... : $BUILD_HOST
 echo Build user.................... : $USER
 echo Draft API..................... : $enable_drafts
 echo Python Bindings............... : $ZPROJECT_BINDINGS_PYTHON
 echo Install dir................... : $prefix
-echo Install man pages............. : $fty_template_rest_install_man
+echo Install man pages............. : $fty_certificate_generator_rest_install_man
 
 echo
 echo Help:

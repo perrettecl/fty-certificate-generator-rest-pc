@@ -6,9 +6,16 @@ ECPPFLAGS = --nolog
 ECPPFLAGS_CPP = -I$(top_builddir)/include -I$(top_srcdir)/include -I$(top_builddir)/src -I$(top_srcdir)/src
 
 ECPPFILES= \
-  rest_template_GET.ecpp
+  rest_certificate_GET.ecpp \
+  rest_certificate_POST.ecpp \
+  rest_certificate_PUT.ecpp \
+  rest_csr_DELETE.ecpp \
+  rest_csr_GET.ecpp \
+  rest_csr_POST.ecpp \
+  rest_service_GET.ecpp \
+  rest_services_GET.ecpp
 
-TNTLIB_BASENAME=libfty_template_rest
+TNTLIB_BASENAME=libfty_certificate_generator_rest
 TNTLIB_DIRNAME=$(prefix)/lib/bios
 
 ECPPCCFILES = $(ECPPFILES:.ecpp=.cc)
