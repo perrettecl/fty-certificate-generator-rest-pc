@@ -32,7 +32,9 @@
 #include "fty_certificate_generator_rest_classes.h"
 
 //Note: This is to avoid memory leak detection from protobuf
-#include <google/protobuf/util/json_util.h>
+#ifdef GOOGLE_PROTOBUF_VERSION
+    #include <google/protobuf/util/json_util.h>
+#endif
 
 typedef struct {
     const char *testname;           // test name, can be called from command line this way
@@ -189,7 +191,9 @@ main (int argc, char **argv)
         test_runall (verbose);
 
 //Note: This is to avoid memory leak detection from protobuf
+#ifdef GOOGLE_PROTOBUF_VERSION
     google::protobuf::ShutdownProtobufLibrary();
+#endif
 
     return 0;
 }
