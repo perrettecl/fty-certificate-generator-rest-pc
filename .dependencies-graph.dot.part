@@ -1,5 +1,5 @@
-   fty-certificate-generator-rest -> tntdb;
    fty-certificate-generator-rest -> cxxtools;
+   fty-certificate-generator-rest -> tntdb;
    fty-certificate-generator-rest -> fty-common;
    fty-certificate-generator-rest -> fty-common-logging;
    fty-certificate-generator-rest -> fty-common-rest;

@@ -48,9 +48,9 @@ BuildRequires:  libtool
 BuildRequires:  pkgconfig
 BuildRequires:  xmlto
 BuildRequires:  gcc-c++
+BuildRequires:  cxxtools-devel
 BuildRequires:  cyrus-sasl-devel
 BuildRequires:  tntdb-devel
-BuildRequires:  cxxtools-devel
 BuildRequires:  fty-common-devel
 BuildRequires:  fty-common-logging-devel
 BuildRequires:  fty-common-rest-devel
